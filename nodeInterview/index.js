@@ -85,7 +85,7 @@ event loop will be keeping monitoring the call stack to get empty. And once it i
 is pushed to call stack and executed. 
 */
 
-/*
+/* old definations
  * ***event loop order of operations
  * timers: Callbacks scheduled by setTimeout() or setInterval() are executed in this phase
  * pending call backs: I/O callbacks deferred to the next loop iteration are executed her
@@ -93,6 +93,26 @@ is pushed to call stack and executed.
  * poll -> Retrieves new I/O events.
  * check: It invokes setIntermediate() callbacks.
  * close call back: It handles some close callbacks. Eg: socket.on(‘close’, …)
+ */
+
+/**
+ * new defination
+ * start
+ * |
+ * ^
+ * expired timer callback(cb) ex: setTimeout
+ * |
+ * ^
+ * I/O pulling cb, ex: networking, events
+ * |
+ * ^
+ * setImmediate cb,
+ * |
+ * ^
+ * close cb, ex: websocket, websocket shutdown.
+ * 
+ * 
+ * Apart from above we have process.next() and microtask queue. it will be excuted between the above phases
  */
 let clearSetInterval = setInterval(() => {
     console.log("set interval")
