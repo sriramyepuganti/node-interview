@@ -42,7 +42,23 @@ It is used to develop I/O intensive web applications like video streaming sites,
 *setInterval/clearInterval – This is used to run a code block multiple times.
 *setImmediate/clearImmediate – This is used to set the execution of the code at the end of the event loop cycle.
 *process.nextTick – This is used to set the execution of code at the beginning of the next event loop cycle.
+ex-1: console.log('first');
+    setTimeout(() => {
+        console.log('third');
+    }, 0);
+    setImmediate(() => {console.log('fourth');});
+    process.nextTick(() => {
+            console.log('second');
+    });
 
+ex-2: console.log('first');
+    setTimeout(() => {
+        console.log('fourth');
+    }, 1000);
+    setImmediate(() => {console.log('third');});
+    process.nextTick(() => {
+            console.log('second');
+    });
     */
 
 
